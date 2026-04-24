@@ -13,6 +13,8 @@ namespace Hyraxy
         private int punkty = 0;
         private int hyraxyDoZlapania;
 
+        private DateTime startCzas;
+
         private Image imgHyraxa = Image.FromFile("hyrax2.png");
         private Image imgKoszyk = Image.FromFile("koszyk.png");
         private Image imgSzop = Image.FromFile("szop.png");
@@ -31,6 +33,8 @@ namespace Hyraxy
 
             punkty = 0;
             hyraxyDoZlapania = Ustawienia.Hyraxy;
+
+            startCzas = DateTime.Now;
 
             pola = new Button[x, y];
 
@@ -122,8 +126,12 @@ namespace Hyraxy
         {
             timer.Stop();
 
+            TimeSpan czas = DateTime.Now - startCzas;
+
             MessageBox.Show(
-                (win ? "WYGRAŁEŚ" : "PRZEGRAŁEŚ") + "\nTwój wynik: " + punkty,
+                (win ? "WYGRAŁEŚ" : "PRZEGRAŁEŚ") +
+                "\nTwój wynik: " + punkty +
+                "\nCzas: " + czas.Seconds + " s",
                 "Koniec gry",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information
